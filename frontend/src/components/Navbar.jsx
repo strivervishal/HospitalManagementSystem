@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { FaSearch, FaBell, FaShoppingCart, FaUser } from "react-icons/fa";
-import medicleIcon from "../assets/medical.png";
-import adminImg from "../assets/admin.png"; // Adjust path if needed
+// import medicleIcon from "../assets/medical.png";
+// import adminImg from "../assets/admin.png"; // Adjust path if needed
 
 const Navbar = () => {
   return (
@@ -9,7 +9,7 @@ const Navbar = () => {
       {/* Left Side - Logo */}
       <div className="flex items-center">
         <h1 className="text-3xl  text-teal-600 flex items-center">
-        You <span className="text-gray-900 ml-2">Medi</span>
+        You <span className="text-gray-900 ml-2">Medi 💊</span>
           <img 
   src={medicleIcon} 
   alt="Medical Icon" 
