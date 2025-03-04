@@ -1,6 +1,7 @@
 # Hospital Management System 🏥
 
-Welcome to the **Hospital Management System** repository! This project is designed to efficiently manage hospital operations, including patient records, appointments, doctors, and more.
+## 👋 Hello, welcome to the Hospital Management System! 🚑  
+This project is designed to efficiently manage hospital operations, including patient records, appointments, doctors, and more.
 
 ## 🚀 How to Get Started
 
@@ -8,4 +9,4 @@ Welcome to the **Hospital Management System** repository! This project is design
 2. Run the following command to install dependencies:
    ```sh
    npm install
-   ```
+   Myself Bhakti!
