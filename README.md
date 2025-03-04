@@ -9,3 +9,4 @@ Welcome to the **Hospital Management System** repository! This project is design
    ```sh
    npm install
    ```
+
