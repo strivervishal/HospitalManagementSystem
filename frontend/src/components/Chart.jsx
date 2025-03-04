@@ -48,9 +48,8 @@ const Chart = () => {
     );
   };
 
-  
   return (
-    <div className="flex flex-col items-center p-4 rounded-lg">
+    <div className="flex flex-col items-center bg-sky-100 p-4 rounded-lg">
       <h2 className="text-xl font-semibold mb-2">Patients By Department</h2>
       <PieChart width={350} height={300}>
         <Pie
