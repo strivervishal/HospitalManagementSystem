@@ -1,9 +1,19 @@
-import React from 'react'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
 
-const App = () => {
+function App() {
   return (
-    <div className='text-2xl'>App</div>
-  )
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<h1></h1>} />
+        <Route path="/doctors" element={<h1>Doctors</h1>} />
+        <Route path="/appointments" element={<h1>Appointments</h1>} />
+        <Route path="/patients" element={<h1>Patients</h1>} />
+        <Route path="/pharmacy" element={<h1>Pharmacy</h1>} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;
