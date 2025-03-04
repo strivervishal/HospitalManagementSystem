@@ -10,5 +10,6 @@ Welcome to the **Hospital Management System** repository! This project is design
    npm install
    ```
 
+Hello: Myself Malti Bhokare
 
 Hai: Myself Rajesh Bugga
