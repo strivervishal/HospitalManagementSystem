@@ -10,11 +10,11 @@ const Navbar = () => {
       <div className="flex items-center">
         <h1 className="text-3xl  text-teal-600 flex items-center">
         You <span className="text-gray-900 ml-2">Medi 💊</span>
-          <img 
+{/*           <img 
   src={medicleIcon} 
   alt="Medical Icon" 
   className="h-10 w-10 ml-2" 
-/>
+/> */}
 
         </h1>
       </div>
@@ -35,11 +35,11 @@ const Navbar = () => {
   <FaShoppingCart className="text-gray-600 text-xl cursor-pointer hover:text-teal-500" />
   <Link to="/profile" className="flex items-center gap-2">
     {/* Admin Image */}
-    <img
+{/*     <img
       src={adminImg} // Ensure you import this image at the top
       alt="Admin"
        className="h-12 w-12 rounded-full"
-    />
+    /> */}
     <span className="text-gray-700 font-medium">Zain Ahmed</span>
   </Link>
 </div>
