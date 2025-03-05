@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import Dashboard from "./components/Dashboard"; // Import Dashboard component
 
 const App = () => {
   return (
-    <div className='text-2xl'>App</div>
-  )
-}
+    <div>
+      <Dashboard />
+    </div>
+  );
+};
 
-export default App
+export default App;
