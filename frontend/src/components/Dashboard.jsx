@@ -6,9 +6,11 @@ import Navbar from './Navbar'
 
 const Dashboard = () => {
   return (
-    <div>Dashboard
+    <div className="h-263 space-y-10 bg-[#E6F7F7]">
       <Navbar />
       <Sidebar />
+      <h1 className="text-2xl font-bold text-center mr-220">Dashboard</h1>
+
       <DashboardCards />
       <BookedAppointments />
     </div>

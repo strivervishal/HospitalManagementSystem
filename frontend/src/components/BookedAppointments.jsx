@@ -16,11 +16,11 @@ export default function BookedAppointments() {
   };
 
   return (
-    <div className="p-4 sm:p-6 bg-blue-50 rounded-xl shadow-lg w-full max-w-5xl mx-auto">
+    <div className="p-4 sm:p-6 bg-white rounded-xl shadow-lg w-full max-w-5xl mx-auto">
       {/* Header Section */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4">
         <h2 className="text-lg sm:text-xl font-bold">Booked Appointment</h2>
-        <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded mt-2 sm:mt-0">
+        <button className="bg-[#00b6b6] hover:bg-green-600 text-white px-4 py-2 rounded mt-2 sm:mt-0">
           Add New +
         </button>
       </div>
@@ -29,7 +29,7 @@ export default function BookedAppointments() {
       <div className="overflow-x-auto">
         <table className="w-full bg-white shadow-md rounded-lg">
           <thead>
-            <tr className="bg-blue-100 text-sm sm:text-base">
+            <tr className="bg-[#E6F7F7] text-sm sm:text-base">
               <th className="p-3 text-left">Select</th>
               <th className="p-3 text-left">Patient Name</th>
               <th className="p-3 text-left">Assigned Doctor</th>
@@ -40,7 +40,7 @@ export default function BookedAppointments() {
           </thead>
           <tbody>
             {appointments.map((appointment) => (
-              <tr key={appointment.id} className="border-b text-sm sm:text-base">
+              <tr key={appointment.id} className="border-b border-[#E6F7F7] text-sm sm:text-base">
                 <td className="p-3"><input type="checkbox" /></td>
                 <td className="p-3">{appointment.name}</td>
                 <td className="p-3">{appointment.doctor}</td>
