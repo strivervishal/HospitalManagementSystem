@@ -1,9 +1,10 @@
 import React from 'react'
-
-const App = () => {
+import Dashboard from './components/Dashboard'
+export const App = () => {
   return (
-    <div className='text-2xl'>App</div>
+    <div>
+      <Dashboard />
+    </div>
   )
 }
-
 export default App
