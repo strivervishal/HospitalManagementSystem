@@ -48,6 +48,7 @@ const Chart = () => {
     );
   };
 
+  
   return (
     <div className="flex flex-col items-center p-4 rounded-lg">
       <h2 className="text-xl font-semibold mb-2">Patients By Department</h2>
