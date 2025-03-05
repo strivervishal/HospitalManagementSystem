@@ -3,11 +3,6 @@ import { FaHome, FaUserMd, FaCalendarCheck, FaUser, FaPills, FaChartBar, FaCog, 
 export default function Sidebar() {
   return (
     <div className="sidebar">
-      {/* Logo */}
-      <div className="logo">
-        <span className="logo-highlight">You </span> Medi
-      </div>
-
       {/* Menu Items */}
       <nav className="menu">
         <MenuItem icon={<FaHome />} label="Dashboard" active />
@@ -17,7 +12,7 @@ export default function Sidebar() {
         <MenuItem icon={<FaPills />} label="Pharmacy" />
         <MenuItem icon={<FaChartBar />} label="Charts" />
       </nav>
-
+      
       {/* Spacer */}
       <div className="spacer"></div>
 
@@ -42,18 +37,6 @@ export default function Sidebar() {
           position: fixed;
           left: 0;
           top: 0;
-        }
-        .logo {
-          display: flex;
-          align-items: center;
-          font-size: 1.5rem;
-          font-weight: bold;
-          color: #2D3E50;
-          margin-bottom: 2rem;
-          padding-left: 1rem;
-        }
-        .logo-highlight {
-          color: #00B6B6;
         }
         .menu, .bottom-menu {
           display: flex;
