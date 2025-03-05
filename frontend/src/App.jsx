@@ -1,19 +1,12 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
+import React from "react";
+import Dashboard from "./components/Dashboard"; // Import Dashboard component
 
-function App() {
+const App = () => {
   return (
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<h1>Dashboard</h1>} />
-        <Route path="/doctors" element={<h1>Doctors</h1>} />
-        <Route path="/appointments" element={<h1>Appointments</h1>} />
-        <Route path="/patients" element={<h1>Patients</h1>} />
-        <Route path="/pharmacy" element={<h1>Pharmacy</h1>} />
-      </Routes>
-    </Router>
+    <div>
+      <Dashboard />
+    </div>
   );
-}
+};
 
 export default App;

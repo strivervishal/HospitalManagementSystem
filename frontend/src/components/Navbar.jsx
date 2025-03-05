@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
 import { FaSearch, FaBell, FaShoppingCart, FaUser } from "react-icons/fa";
-// import medicleIcon from "../assets/medical.png";
-// import adminImg from "../assets/admin.png"; // Adjust path if needed
 
 const Navbar = () => {
   return (

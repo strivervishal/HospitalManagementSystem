@@ -1,9 +1,16 @@
-import React from 'react'
+import React from "react";
+import Navbar from "./Navbar"; 
 
 const Dashboard = () => {
   return (
-    <div>Dashboard</div>
-  )
-}
+    <>
+      <Navbar />
+      <div className="text-2xl text-gray-700"></div>
+    </>
+  );
+};
 
-export default Dashboard
+export default Dashboard;
+
+
+
