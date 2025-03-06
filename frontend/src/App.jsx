@@ -1,10 +1,17 @@
-import React from 'react'
-import Dashboard from './components/Dashboard'
-export const App = () => {
+import Sidebar from "./components/Sidebar";
+import Navbar from "./components/Navbar";
+import Dashboard from "./components/Dashboard";
+
+function App() {
   return (
-    <div>
-      <Dashboard />
+    <div className="flex">
+      <Sidebar />
+      <div className="flex-1">
+        <Navbar />
+        <Dashboard />
+      </div>
     </div>
-  )
+  );
 }
-export default App
+
+export default App;
