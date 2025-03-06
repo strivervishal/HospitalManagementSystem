@@ -3,10 +3,11 @@ import { FaUserPlus, FaProcedures, FaDollarSign, FaCalendarCheck, FaTrash, FaEdi
 const Dashboard = () => {
   return (
     <div className="p-6 bg-[#e8f8f8] min-h-screen">
-      <h1 className="text-2xl font-bold">Dashboard</h1>
+      <h1 className="text-2xl font-bold"></h1>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mt-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-20 mt-20">
+
         {[ 
           { icon: <FaCalendarCheck className="text-teal-500 text-3xl" />, title: "Appointments", count: 120, percent: 60, color: "teal" },
           { icon: <FaUserPlus className="text-orange-500 text-3xl" />, title: "New Patients", count: 1500, percent: 50, color: "orange" },
@@ -39,7 +40,7 @@ const Dashboard = () => {
         <table className="w-full mt-4 border-collapse">
           <thead>
             <tr className="bg-[#e8f8f8] text-left">
-              {['Patient Name', 'Assigned Doctor', 'Date', 'Time', 'Action'].map((header, index) => (
+              {["Patient Name", "Assigned Doctor", "Date", "Time", "Action"].map((header, index) => (
                 <th key={index} className="p-3 text-gray-600 border-b border-gray-300">{header}</th>
               ))}
             </tr>

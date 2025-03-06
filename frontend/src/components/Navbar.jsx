@@ -2,7 +2,14 @@ import { FaBell, FaShoppingCart, FaSearch } from "react-icons/fa";
 
 const Navbar = () => {
   return (
-    <div className="flex items-center justify-between bg-white shadow-md p-4">
+    <div className="fixed top-0 w-full bg-white shadow-md p-4 h-16 flex items-center justify-between z-50">
+      {/* Logo */}
+      <div className="text-2xl font-bold flex items-center">
+        <span className="text-teal-500">You</span>
+        <span className="text-gray-800">Medi</span>
+      </div>
+
+      {/* Search Bar */}
       <div className="relative w-1/3">
         <input
           type="text"
@@ -11,6 +18,8 @@ const Navbar = () => {
         />
         <FaSearch className="absolute top-3 right-3 text-gray-500" />
       </div>
+
+      {/* Icons */}
       <div className="flex items-center space-x-6">
         <FaBell className="text-gray-600 cursor-pointer" />
         <FaShoppingCart className="text-gray-600 cursor-pointer" />

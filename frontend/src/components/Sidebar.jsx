@@ -2,11 +2,7 @@ import { FaHome, FaUserMd, FaCalendarCheck, FaUsers, FaPills, FaChartBar, FaCog,
 
 const Sidebar = () => {
   return (
-    <div className="w-64 h-screen bg-white shadow-lg flex flex-col">
-      <div className="p-4 text-2xl font-bold flex items-center">
-        <span className="text-teal-500">You</span>
-        <span className="text-gray-800">Medi</span>
-      </div>
+    <div className="w-64 bg-white shadow-lg h-[calc(100vh-64px)] mt-16 flex flex-col fixed">
       <ul className="flex-1">
         <li className="flex items-center px-6 py-3 bg-teal-500 text-white">
           <FaHome className="mr-3" />
