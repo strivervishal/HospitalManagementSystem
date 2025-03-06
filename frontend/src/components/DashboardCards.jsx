@@ -4,10 +4,12 @@ import { faCalendarCheck, faUserPlus, faProcedures, faDollarSign, faArrowUp } fr
 
 const DashboardCards = () => {
   return (
-    <div className="bg-blue-50 flex justify-center items-center min-h-screen">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-4">
+    <div className="bg-blue-5 flex justify-center items-center ">
+      
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 p-4">
         {/* Appointments Card */}
-        <div className="bg-white rounded-lg shadow p-4">
+        
+        <div className="bg-white rounded-lg w-60 shadow p-7">
           <div className="flex items-center mb-2">
             <FontAwesomeIcon icon={faCalendarCheck} className="text-teal-500 text-xl" />
             <h2 className="ml-2 text-lg font-semibold">Appointments</h2>
@@ -21,7 +23,7 @@ const DashboardCards = () => {
           </div>
         </div>
         {/* New Patients Card */}
-        <div className="bg-white rounded-lg shadow p-4">
+        <div className="bg-white rounded-lg shadow p-7">
           <div className="flex items-center mb-2">
             <FontAwesomeIcon icon={faUserPlus} className="text-orange-500 text-xl" />
             <h2 className="ml-2 text-lg font-semibold">New Patients</h2>
@@ -35,7 +37,7 @@ const DashboardCards = () => {
           </div>
         </div>
         {/* Operations Card */}
-        <div className="bg-white rounded-lg shadow p-4">
+        <div className="bg-white rounded-lg shadow p-7">
           <div className="flex items-center mb-2">
             <FontAwesomeIcon icon={faProcedures} className="text-blue-500 text-xl" />
             <h2 className="ml-2 text-lg font-semibold">Operations</h2>
@@ -49,7 +51,7 @@ const DashboardCards = () => {
           </div>
         </div>
         {/* HPL Earning Card */}
-        <div className="bg-white rounded-lg shadow p-4">
+        <div className="bg-white rounded-lg shadow p-7">
           <div className="flex items-center mb-2">
             <FontAwesomeIcon icon={faDollarSign} className="text-purple-500 text-xl" />
             <h2 className="ml-2 text-lg font-semibold">HPL Earning</h2>

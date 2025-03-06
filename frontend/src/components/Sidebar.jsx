@@ -14,6 +14,16 @@ import {
 export default function Sidebar() {
   return (
     <div className="sidebar">
+      <div className="flex items-center">
+        <h1 className="text-3xl text-teal-600 ml-2 flex items-center">
+          You <span className="text-gray-900 ml-3">Medi</span>
+          <img
+            src="https://i.imgur.com/dVs8bZy.png"
+            alt="Medical Icon"
+            className="h-10 w-10 ml-2"
+          />
+        </h1>
+      </div>
       {/* Menu Items */}
       <nav className="menu">
         <MenuItem icon={<FaHome />} label="Dashboard" active />
@@ -37,13 +47,14 @@ export default function Sidebar() {
       <style jsx>{`
         .sidebar {
           height: 100vh;
-          width: 16rem;
-          background: #e6faf9;
+          width: 20rem;
+          background:white;
           padding: 1.5rem;
           display: flex;
+          
           flex-direction: column;
           color: #2d3e50;
-          box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+          
           font-family: sans-serif;
           position: fixed;
           left: 0;
@@ -54,6 +65,7 @@ export default function Sidebar() {
           display: flex;
           flex-direction: column;
           gap: 0.75rem;
+          margin-top: 60px;
           font-size: 1.125rem;
         }
         .bottom-menu {
@@ -88,7 +100,7 @@ function MenuItem({ icon, label, active }) {
           background: #d1f5f0;
         }
         .menu-item.active {
-          background: #00b6b6;
+          background:#00b6b6;
           color: white;
         }
         .icon {
