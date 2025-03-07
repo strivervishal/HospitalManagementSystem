@@ -1,47 +1,38 @@
-import { FaSearch, FaBell, FaShoppingCart, FaUser } from "react-icons/fa";
+import { FaBell, FaShoppingCart, FaSearch } from "react-icons/fa";
 
 const Navbar = () => {
   return (
-    <nav className="bg-white shadow-md p-4 flex justify-between items-center">
-      {/* Left Side - Logo */}
-      <div className="flex items-center">
-        <h1 className="text-3xl text-teal-600 flex items-center">
-          You <span className="text-gray-900 ml-2">Medi</span>
-          <img
-            src="https://i.imgur.com/dVs8bZy.png"
-            alt="Medical Icon"
-            className="h-10 w-10 ml-2"
-          />
-        </h1>
+    <div className="fixed top-0 w-full bg-white shadow-md p-4 h-16 flex items-center justify-between z-50">
+      {/* Logo */}
+      <div className="text-2xl font-bold flex items-center">
+        <span className="text-teal-500">You</span>
+        <span className="text-gray-800">Medi</span>
       </div>
 
-      {/* Center - Search Bar */}
-      <div className="relative w-1/3 ml-20">
+      {/* Search Bar */}
+      <div className="relative w-1/3">
         <input
           type="text"
+          className="w-full px-4 py-2 border rounded-full bg-gray-100"
           placeholder="Search"
-          className="w-full border rounded-full py-2 px-4 pl-10 text-gray-600 focus:outline-none focus:ring-2 focus:ring-teal-500"
         />
-        <FaSearch className="absolute left-3 top-3 text-gray-500" />
+        <FaSearch className="absolute top-3 right-3 text-gray-500" />
       </div>
 
-      {/* Right Side - Icons & User Profile */}
-      <div className="flex items-center gap-8">
-        {" "}
-        {/* Adjusted gap for better spacing */}
-        <FaBell className="text-gray-600 text-xl cursor-pointer hover:text-teal-500" />
-        <FaShoppingCart className="text-gray-600 text-xl cursor-pointer hover:text-teal-500" />
-        {/* Button instead of Link */}
-        <button className="flex items-center gap-2 bg-teal-600 text-white px-4 py-2 rounded-full hover:bg-teal-700">
+      {/* Icons */}
+      <div className="flex items-center space-x-6">
+        <FaBell className="text-gray-600 cursor-pointer" />
+        <FaShoppingCart className="text-gray-600 cursor-pointer" />
+        <div className="bg-teal-500 text-white px-4 py-2 rounded-full flex items-center cursor-pointer">
           <img
-            src="https://i.imgur.com/w0Q4XdT.png"
-            alt="Admin"
-            className="h-12 w-12 rounded-full"
+            src="https://randomuser.me/api/portraits/men/1.jpg"
+            alt="User"
+            className="w-8 h-8 rounded-full mr-2"
           />
-          <span className="text-white font-medium">Zain Ahmed</span>
-        </button>
+          <span>Zain Ahmed</span>
+        </div>
       </div>
-    </nav>
+    </div>
   );
 };
 
