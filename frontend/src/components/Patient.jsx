@@ -61,6 +61,7 @@ const Patient = () => {
       <Navbar />
       <Sidebar />
 
+
       {/* Main Content */}
       <div className="flex-1 mt-15 p-4 bg-gray-100 ml-64">
         <div className="bg-white rounded-xl shadow-lg p-6">
