@@ -1,60 +1,58 @@
-import React, { useState } from "react";
-import { FaTrash, FaEdit } from "react-icons/fa";
+import React, { useState, useEffect } from "react";
 
-const initialAppointments = [
-  { id: 1, name: "Shiva Kumar", doctor: "Dr. Sai Ahmed", date: "08/03/2025", time: "08:30" },
-  { id: 2, name: "Shashank", doctor: "Dr. Dinesh Kumar", date: "13/03/2025", time: "09:30" },
-  { id: 3, name: "Dakshitha Kumari", doctor: "Dr. Zain Ahmed", date: "14/03/2025", time: "10:30" },
-  { id: 4, name: "Laila Mahmoud", doctor: "Dr. Vishal Pandey ", date: "14/03/2025", time: "08:30" },
-];
+const Appointment = () => {
+  const [appointments, setAppointments] = useState([]);
 
-export default function BookedAppointments() {
-  const [appointments, setAppointments] = useState(initialAppointments);
+  useEffect(() => {
+    fetchAppointments();
+  }, []);
 
-  const handleDelete = (id) => {
-    setAppointments(appointments.filter((appointment) => appointment.id !== id));
+  const fetchAppointments = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/appointments");
+      const data = await response.json();
+      setAppointments(data);
+    } catch (error) {
+      console.error("Error fetching appointments:", error);
+    }
   };
 
   return (
-    <div className="p-4 sm:p-6 bg-white rounded-xl shadow-lg w-full max-w-5xl mx-auto">
-      {/* Header Section */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4">
-        <h2 className="text-lg sm:text-xl font-bold">Booked Appointment</h2>
-        <button className="bg-[#00b6b6] hover:bg-green-600 text-white px-4 py-2 rounded mt-2 sm:mt-0">
-          Add New +
-        </button>
-      </div>
-
-      {/* Responsive Table */}
-      <div className="overflow-x-auto">
-        <table className="w-full bg-white shadow-md rounded-lg">
+    <div className="h-screen flex justify-center items-center bg-gray-100">
+      <div className="bg-white p-6 rounded-xl shadow-lg w-305 -mt-150 ml-6">
+        <h2 className="text-2xl font-bold text-center mb-4">Scheduled Appointments</h2>
+        <table className="w-full border-collapse">
           <thead>
-            <tr className="bg-[#E6F7F7] text-sm sm:text-base">
-              <th className="p-3 text-left">Select</th>
-              <th className="p-3 text-left">Patient Name</th>
-              <th className="p-3 text-left">Assigned Doctor</th>
-              <th className="p-3 text-left">Date</th>
-              <th className="p-3 text-left">Time</th>
-              <th className="p-3 text-left">Action</th>
+            <tr className="bg-[#e8f8f8] text-left">
+              {["Patient Name", "Assigned Doctor", "Date", "Time"].map((header, index) => (
+                <th key={index} className="p-3 text-gray-600 border-b border-gray-300">
+                  {header}
+                </th>
+              ))}
             </tr>
           </thead>
           <tbody>
-            {appointments.map((appointment) => (
-              <tr key={appointment.id} className="border-b border-[#E6F7F7] text-sm sm:text-base">
-                <td className="p-3"><input type="checkbox" /></td>
-                <td className="p-3">{appointment.name}</td>
-                <td className="p-3">{appointment.doctor}</td>
-                <td className="p-3">{appointment.date}</td>
-                <td className="p-3">{appointment.time}</td>
-                <td className="p-3 flex gap-3">
-                  <FaEdit className="text-blue-500 cursor-pointer hover:text-blue-600" />
-                  <FaTrash className="text-red-500 cursor-pointer hover:text-red-600" onClick={() => handleDelete(appointment.id)} />
+            {appointments.length > 0 ? (
+              appointments.map((appointment) => (
+                <tr key={appointment._id} className="border-b border-gray-300 hover:bg-gray-100 transition">
+                  <td className="p-3">{appointment.patientName}</td>
+                  <td className="p-3">{appointment.assignedDoctor}</td>
+                  <td className="p-3">{appointment.date}</td>
+                  <td className="p-3">{appointment.time}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="4" className="p-3 text-center text-gray-500">
+                  No Appointments Found
                 </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>
     </div>
   );
-}
+};
+
+export default Appointment;
