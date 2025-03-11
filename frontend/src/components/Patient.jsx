@@ -1,5 +1,6 @@
 
 
+
 import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
@@ -25,7 +26,11 @@ const Patient = () => {
     const fetchPatients = async () => {
       try {
         const response = await axios.get("http://localhost:5000/patients"); // Adjust the endpoint as per your backend
-        setPatients(response.data);
+        const patientsData = response.data.map((p, index) => ({
+          ...p,
+          id: p.id || index + 1, // Ensure each patient has an ID
+        }));
+        setPatients(patientsData);
       } catch (error) {
         console.error("Error fetching patients:", error);
       }
@@ -59,8 +64,12 @@ const Patient = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/patients", newPatient);
+      const newId = patients.length > 0 ? Math.max(...patients.map(p => p.id)) + 1 : 1; // Generate sequential ID
+      const newPatientWithId = { ...newPatient, id: newId };
+
+      const response = await axios.post("http://localhost:5000/patients", newPatientWithId);
       setPatients([...patients, response.data]); // Add new patient to state
+
       setShowForm(false);
       setNewPatient({ name: "", age: "", gender: "Male", appointment: "", doctorAssigned: "" });
     } catch (error) {
@@ -152,7 +161,8 @@ const Patient = () => {
                 <th className="p-4 text-left">Doctor Assigned</th>
               </tr>
             </thead>
-            <tbody>
+            
+              <tbody>
               {paginatedPatients.length > 0 ? (
                 paginatedPatients.map((patient) => (
                   <tr key={patient.id} className="border-t hover:bg-teal-100 transition">
@@ -171,7 +181,11 @@ const Patient = () => {
                   </td>
                 </tr>
               )}
-            </tbody>
+            </tbody> 
+            
+          
+
+            
           </table>
         </div>
       </div>
