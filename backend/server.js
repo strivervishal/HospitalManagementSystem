@@ -6,6 +6,11 @@ const passport = require("passport");
 const session = require("express-session");
 const User = require("./models/user");
 
+const doctorRoutes = require("./routes/doctorRoutes");
+const patientRoutes = require("./routes/patientRoutes");
+const appointmentRoutes = require("./routes/appointment");
+const authRoutes = require("./routes/auth");
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI;
@@ -55,12 +60,9 @@ async function connectDB() {
 }
 connectDB();
 
-const patientRoutes = require("./routes/patientRoutes");
-const appointmentRoutes = require("./routes/appointment");
-const authRoutes = require("./routes/auth");
-
 app.use("/patients", patientRoutes);
 app.use("/appointments", appointmentRoutes);
 app.use("/auth", authRoutes);
+app.use("/api/doctors", doctorRoutes);
 
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
