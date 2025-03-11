@@ -24,5 +24,13 @@ const appointmentRoutes = require("./routes/appointment");
 app.use("/patients", patientRoutes);
 app.use("/appointments", appointmentRoutes);
 
+//Routes Pharmacy
+const medicineRoutes = require("./routes/medicineRoutes");
+const orderRoutes = require("./routes/orderRoutes");
+
+app.use("/api/medicines", medicineRoutes);
+app.use("/api/orders", orderRoutes);
+
+
 // Start Server
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
