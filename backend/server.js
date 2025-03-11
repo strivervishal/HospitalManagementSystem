@@ -2,27 +2,26 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const doctorRoutes = require("./routes/doctorRoutes");
 
 const app = express();
-const PORT = process.env.PORT || 5000;
-const MONGO_URI = process.env.MONGO_URI;
 
-// Middleware
 app.use(express.json());
 app.use(cors());
 
-// Connect to MongoDB Atlas
+
+
+const PORT = process.env.PORT || 5000;
+const MONGO_URI = process.env.MONGO_URI;
+
 mongoose
-  .connect(MONGO_URI)
+  .connect(MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log("MongoDB connected successfully"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
-// Routes
-const patientRoutes = require("./routes/patientRoutes");
-const appointmentRoutes = require("./routes/appointment");
-
-app.use("/patients", patientRoutes);
-app.use("/appointments", appointmentRoutes);
-
-// Start Server
+app.use("/appointments", require("./routes/appointment"));
+app.use("/api/doctors", doctorRoutes);
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
