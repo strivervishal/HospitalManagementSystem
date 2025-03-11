@@ -3,6 +3,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const doctorRoutes = require("./routes/doctorRoutes");
+const patientRoutes = require("./routes/patientRoutes");
+const appointmentRoutes = require("./routes/appointment");
 
 const app = express();
 
@@ -21,7 +23,7 @@ mongoose
   })
   .then(() => console.log("MongoDB connected successfully"))
   .catch((err) => console.error("MongoDB connection error:", err));
-
-app.use("/appointments", require("./routes/appointment"));
+app.use("/patients", patientRoutes);
+app.use("/appointments", appointmentRoutes);
 app.use("/api/doctors", doctorRoutes);
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
