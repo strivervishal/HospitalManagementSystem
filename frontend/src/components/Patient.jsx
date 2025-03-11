@@ -1,6 +1,3 @@
-
-
-
 import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
@@ -10,6 +7,15 @@ const Patient = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [patients, setPatients] = useState([]);
+  Array(30).fill(null).map((_, index) => ({
+    id: index + 1,
+    name: "Patient " + (index + 1),
+    age: 20 + (index % 5),
+    gender: index % 2 === 0 ? "Male" : "Female",
+    appointment: "2024-08-13 08:30",
+    doctorAssigned: "Dr. Smith"
+  }))
+
   const [showForm, setShowForm] = useState(false);
   const [newPatient, setNewPatient] = useState({
     name: "",
@@ -19,7 +25,7 @@ const Patient = () => {
     doctorAssigned: "",
   });
 
-  const itemsPerPage = 9;
+  const itemsPerPage = 10;
 
   // Fetch patients from the backend
   useEffect(() => {
@@ -96,7 +102,7 @@ const Patient = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
-            <button className="bg-teal-500 text-white px-4 py-2 rounded-lg shadow-md" onClick={handleAddNew}>
+            <button className="bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded-lg shadow-md" onClick={handleAddNew}>
               Add New +
             </button>
           </div>
@@ -144,15 +150,15 @@ const Patient = () => {
                   onChange={(e) => setNewPatient({ ...newPatient, doctorAssigned: e.target.value })}
                   required
                 />
-                <button type="submit" className="bg-green-500 text-white p-3 rounded-lg shadow-md">Save</button>
-                <button onClick={() => setShowForm(false)} className="bg-red-300 hover:bg-red-500 text-white p-3 rounded-lg shadow-md">Cancel</button>
+                <button type="submit" className="bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded-lg shadow-md">Save</button>
+                <button onClick={() => setShowForm(false)} className="bg-red-400 hover:bg-red-500 text-white p-3 rounded-lg shadow-md">Cancel</button>
               </div>
             </form>
           )}
 
           <table className="w-full border-collapse shadow-lg rounded-lg overflow-hidden">
             <thead>
-              <tr className="bg-teal-600 text-white">
+              <tr className="bg-teal-500 text-white">
                 <th className="p-4 text-left">ID</th>
                 <th className="p-4 text-left">Patient Name</th>
                 <th className="p-4 text-left">Age</th>
@@ -162,10 +168,10 @@ const Patient = () => {
               </tr>
             </thead>
             
-              <tbody>
+            <tbody>
               {paginatedPatients.length > 0 ? (
-                paginatedPatients.map((patient) => (
-                  <tr key={patient.id} className="border-t hover:bg-teal-100 transition">
+                paginatedPatients.map((patient, index) => (
+                  <tr key={patient.id} className="border-b border-gray-300 hover:bg-gray-100 transition">
                     <td className="p-4">{patient.id}</td>
                     <td className="p-4 font-medium">{patient.name}</td>
                     <td className="p-4">{patient.age}</td>
@@ -182,11 +188,44 @@ const Patient = () => {
                 </tr>
               )}
             </tbody> 
-            
-          
-
-            
           </table>
+
+          <div className="flex items-center justify-end gap-2 mt-6">
+            <button
+              disabled={currentPage === 1}
+              onClick={() => goToPage(currentPage - 1)}
+              className="px-3 py-1 border rounded-lg disabled:opacity-50"
+            >
+              &lt;
+            </button>
+
+            {currentPage > 2 && <span className="px-3 py-1">...</span>}
+
+            {[...Array(totalPages).keys()]
+              .map((_, i) => i + 1)
+              .filter((page) => page === 1 || page === totalPages || (page >= currentPage - 1 && page <= currentPage + 1))
+              .map((page) => (
+                <button
+                  key={page}
+                  onClick={() => goToPage(page)}
+                  className={`px-3 py-1 border rounded-lg ${
+                    currentPage === page ? "bg-teal-500 text-white" : ""
+                  }`}
+                >
+                  {page}
+                </button>
+              ))}
+
+            {currentPage < totalPages - 1 && <span className="px-3 py-1">...</span>}
+
+            <button
+              disabled={currentPage === totalPages}
+              onClick={() => goToPage(currentPage + 1)}
+              className="px-3 py-1 border rounded-lg disabled:opacity-50"
+            >
+              &gt;
+            </button>
+          </div>
         </div>
       </div>
     </div>
