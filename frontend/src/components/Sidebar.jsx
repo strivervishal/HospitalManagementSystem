@@ -1,7 +1,21 @@
 import { FaHome, FaUserMd, FaCalendarCheck, FaUsers, FaPills, FaChartBar, FaCog, FaQuestionCircle, FaSignOutAlt } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Sidebar = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await axios.get("http://localhost:5000/auth/logout", { withCredentials: true });
+      localStorage.removeItem("user");
+      navigate("/login");
+      window.location.reload();
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
+
   return (
     <div className="w-64 bg-white shadow-lg h-[calc(100vh-64px)] mt-16 flex flex-col fixed">
       <ul className="flex-1">
@@ -39,10 +53,10 @@ const Sidebar = () => {
           <FaQuestionCircle className="mr-3" />
           Help Center
         </Link>
-        <Link to="/logOut" className="flex items-center px-6 py-3 text-red-500 hover:bg-gray-100">
+        <button onClick={handleLogout} className="w-full text-left flex items-center px-6 py-3 text-red-500 hover:bg-gray-100">
           <FaSignOutAlt className="mr-3" />
           Log Out
-        </Link>
+        </button>
       </div>
     </div>
   );
