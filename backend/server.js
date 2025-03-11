@@ -20,5 +20,6 @@ mongoose
   .catch((err) => console.error("MongoDB connection error:", err));
 
 app.use("/appointments", require("./routes/appointment"));
+app.use("/doctors",require("./routes/doctor"))
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
