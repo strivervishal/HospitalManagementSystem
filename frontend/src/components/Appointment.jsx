@@ -142,7 +142,7 @@ const Appointment = () => {
             />
             <button
               onClick={editMode ? handleUpdate : handleAddAppointment}
-              className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition w-full"
+              className="bg-teal-500 text-white px-4 py-2 rounded-lg hover:bg-teal-600 transition w-full"
             >
               {editMode ? "Save Changes" : "Save Appointment"}
             </button>
@@ -185,27 +185,3 @@ const Appointment = () => {
  }
 
 export default Appointment;
-
-// import Sidebar from "../components/Sidebar";
-// import Navbar from "../components/Navbar";
-
-// const Dashboard = () => {
-//   return (
-//     <>
-//       <div className="h-screen flex flex-col">
-//         {/* Navbar at the top */}
-//         <Navbar />
-
-//         {/* Sidebar + Content */}
-//         <div className="flex flex-1">
-//           {/* Sidebar remains fixed */}
-//           <Sidebar />
-
-          
-//         </div>
-//       </div>
-//     </>
-//   );
-// };
-
-// export default Dashboard;

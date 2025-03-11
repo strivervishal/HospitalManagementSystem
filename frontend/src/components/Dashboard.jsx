@@ -1,9 +1,3 @@
-import {
-  FaUserPlus,
-  FaProcedures,
-  FaDollarSign,
-  FaCalendarCheck,
-} from "react-icons/fa";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import DashboardCards from "./DashboardCards";
