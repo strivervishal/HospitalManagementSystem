@@ -19,7 +19,7 @@ const Appointment = () => {
 
   return (
     <div className="h-screen flex justify-center items-center bg-gray-100">
-      <div className="bg-white p-6 rounded-xl shadow-lg w-305 -mt-100 ml-6">
+      <div className="bg-white p-6 rounded-xl shadow-lg w-305 -mt-70 ml-6">
         <h2 className="text-2xl font-bold text-center mb-4">Scheduled Appointments</h2>
         <table className="w-full border-collapse">
           <thead>
