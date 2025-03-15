@@ -7,23 +7,51 @@ import Patient from "./components/Patient";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import AdminPage from "./components/AdminPage";
-import AdminRoute from "./components/AdminRoute";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
-  const user = JSON.parse(localStorage.getItem("user"));
-
   return (
     <Routes>
       <Route path="/" element={<Dashboard />} />
-      <Route path="/doctor" element={<Doctor />} />
-      <Route path="/appointment" element={<Appointment />} />
+
+      {/* Protected Doctor Route (Only Doctors and Admins) */}
+      <Route
+        element={
+          <ProtectedRoute
+            allowedRoles={["doctor", "admin"]}
+            alertMessage="You are not a doctor, so you can't access this page."
+          />
+        }
+      >
+        <Route path="/doctor" element={<Doctor />} />
+      </Route>
+
+      {/* Protected Appointment Route (Only Patients and Admins) */}
+      <Route
+        element={
+          <ProtectedRoute
+            allowedRoles={["patient", "admin"]}
+            alertMessage="You are not a patient, so you can't book an appointment."
+          />
+        }
+      >
+        <Route path="/appointment" element={<Appointment />} />
+      </Route>
+
       <Route path="/patient" element={<Patient />} />
       <Route path="/pharmacy" element={<Pharmacy />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
 
-      {/* Protected Admin Route */}
-      <Route element={<AdminRoute user={user} />}>
+      {/* Protected Admin Route (Only Admins) */}
+      <Route
+        element={
+          <ProtectedRoute
+            allowedRoles={["admin"]}
+            alertMessage="You are not an admin."
+          />
+        }
+      >
         <Route path="/admin" element={<AdminPage />} />
       </Route>
     </Routes>
