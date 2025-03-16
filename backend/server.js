@@ -7,7 +7,7 @@ const session = require("express-session");
 const User = require("./models/user");
 
 const doctorRoutes = require("./routes/doctorRoutes");
-const dashboardCardRoutes = require("/routes/dashboardcards"); 
+const dashboardCardRoutes = require("./routes/dashboardCards"); 
 const patientRoutes = require("./routes/patientRoutes");
 const appointmentRoutes = require("./routes/appointment");
 const authRoutes = require("./routes/auth");
