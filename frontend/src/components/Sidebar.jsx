@@ -39,7 +39,7 @@ const Sidebar = () => {
           <FaPills className="mr-3" />
           Pharmacy
         </Link>
-        <Link to="/chart" className="flex items-center px-6 py-3 hover:bg-gray-100">
+        <Link to="/charts" className="flex items-center px-6 py-3 hover:bg-gray-100">
           <FaChartBar className="mr-3" />
           Charts
         </Link>
