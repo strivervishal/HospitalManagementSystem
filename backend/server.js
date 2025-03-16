@@ -7,7 +7,7 @@ const session = require("express-session");
 const User = require("./models/user");
 
 const doctorRoutes = require("./routes/doctorRoutes");
-//const dashboardCardRoutes = require("/routes/dashboardcards"); 
+const dashboardCardRoutes = require("/routes/dashboardcards"); 
 const patientRoutes = require("./routes/patientRoutes");
 const appointmentRoutes = require("./routes/appointment");
 const authRoutes = require("./routes/auth");
@@ -65,7 +65,7 @@ connectDB();
 
 app.use("/patients", patientRoutes);
 app.use("/appointments", appointmentRoutes);
-//app.use("/api/dashboardcards", dashboardCardRoutes);
+app.use("/api/dashboardcards", dashboardCardRoutes);
 app.use("/auth", authRoutes);
 app.use("/api/doctors", doctorRoutes);
 app.use("/api/medicines", medicineRoutes);
