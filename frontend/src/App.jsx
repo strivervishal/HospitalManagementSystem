@@ -8,13 +8,14 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import AdminPage from "./components/AdminPage";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Charts from "./components/Charts"; // ✅ Import Charts
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Dashboard />} />
 
-      {/* Protected Doctor Route (Only Doctors and Admins) */}
+      {/* Protected Doctor Route */}
       <Route
         element={
           <ProtectedRoute
@@ -26,7 +27,7 @@ function App() {
         <Route path="/doctor" element={<Doctor />} />
       </Route>
 
-      {/* Protected Appointment Route (Only Patients and Admins) */}
+      {/* Protected Appointment Route */}
       <Route
         element={
           <ProtectedRoute
@@ -43,7 +44,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
 
-      {/* Protected Admin Route (Only Admins) */}
+      {/* Protected Admin Route */}
       <Route
         element={
           <ProtectedRoute
@@ -54,6 +55,9 @@ function App() {
       >
         <Route path="/admin" element={<AdminPage />} />
       </Route>
+
+      {/* ✅ Separate Charts Page Route */}
+      <Route path="/charts" element={<Charts />} />
     </Routes>
   );
 }
