@@ -14,7 +14,11 @@ import {
   FiChevronDown,
   FiCalendar,
   FiX,
+  FiFileText,
+  FiSend,
 } from "react-icons/fi"
+import { jsPDF } from "jspdf"
+import "jspdf-autotable"
 
 const Doctor = () => {
   const [doctors, setDoctors] = useState([])
@@ -27,10 +31,29 @@ const Doctor = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [editingDoctor, setEditingDoctor] = useState(null)
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(null)
+  const [showExportPopup, setShowExportPopup] = useState(false)
+  const searchTimeoutRef = useRef(null)
 
   useEffect(() => {
     fetchDoctors()
-  }, [currentPage, searchQuery, selectedDate])
+  }, [currentPage, selectedDate])
+
+  // Add effect for search with debounce
+  useEffect(() => {
+    if (searchTimeoutRef.current) {
+      clearTimeout(searchTimeoutRef.current)
+    }
+
+    searchTimeoutRef.current = setTimeout(() => {
+      fetchDoctors()
+    }, 500)
+
+    return () => {
+      if (searchTimeoutRef.current) {
+        clearTimeout(searchTimeoutRef.current)
+      }
+    }
+  }, [searchQuery])
 
   const fetchDoctors = async () => {
     try {
@@ -62,6 +85,7 @@ const Doctor = () => {
 
   // Fixed add doctor handler to properly submit the form data
   const handleAddDoctor = async (doctorData) => {
+    console.log(doctorData)
     try {
       await axios.post("http://localhost:5000/api/doctors", doctorData)
       fetchDoctors()
@@ -102,8 +126,53 @@ const Doctor = () => {
   }
 
   const handleExport = () => {
-    // Implement export functionality
-    console.log("Export doctors list")
+    setShowExportPopup(true)
+  }
+
+  const handleExportPDF = () => {
+    const doc = new jsPDF()
+
+    // Add title
+    doc.setFontSize(18)
+    doc.text("Doctors List", 14, 22)
+
+    // Define the columns for the table
+    const tableColumn = ["Name", "Department", "Date", "Time"]
+    const tableRows = []
+
+    // Add data to the table
+    doctors.forEach((doctor) => {
+      const doctorData = [doctor.name, doctor.department, doctor.date, doctor.time]
+      tableRows.push(doctorData)
+    })
+
+    // Generate the PDF table
+    doc.autoTable({
+      head: [tableColumn],
+      body: tableRows,
+      startY: 30,
+      styles: { fontSize: 10, cellPadding: 3 },
+      headStyles: { fillColor: [0, 128, 128] },
+    })
+
+    // Save the PDF
+    doc.save("doctors-list.pdf")
+    setShowExportPopup(false)
+  }
+
+  const handleShareWhatsApp = () => {
+    // Create a text message with the doctors list
+    let message = "Doctors List:\n\n"
+    doctors.forEach((doctor, index) => {
+      message += `${index + 1}. ${doctor.name} - ${doctor.department} (${doctor.date}, ${doctor.time})\n`
+    })
+
+    // Encode the message for WhatsApp
+    const encodedMessage = encodeURIComponent(message)
+
+    // Open WhatsApp with the pre-filled message
+    window.open(`https://wa.me/?text=${encodedMessage}`, "_blank")
+    setShowExportPopup(false)
   }
 
   return (
@@ -294,6 +363,48 @@ const Doctor = () => {
                     onClick={() => handleDeleteDoctor(showDeleteConfirm)}
                   >
                     Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Export Popup */}
+          {showExportPopup && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+              <div className="bg-white rounded-lg p-6 max-w-sm w-full">
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="text-lg font-semibold">Export Doctors List</h3>
+                  <button onClick={() => setShowExportPopup(false)} className="text-gray-500 hover:text-gray-700">
+                    <FiX size={20} />
+                  </button>
+                </div>
+
+                <div className="space-y-4 py-2">
+                  <button
+                    onClick={handleExportPDF}
+                    className="w-full flex items-center gap-3 px-4 py-3 text-left rounded-md hover:bg-gray-50 border border-gray-200"
+                  >
+                    <div className="bg-red-100 p-2 rounded-full">
+                      <FiFileText className="text-red-500" size={20} />
+                    </div>
+                    <div>
+                      <p className="font-medium">Download as PDF</p>
+                      <p className="text-sm text-gray-500">Save the list as a PDF document</p>
+                    </div>
+                  </button>
+
+                  <button
+                    onClick={handleShareWhatsApp}
+                    className="w-full flex items-center gap-3 px-4 py-3 text-left rounded-md hover:bg-gray-50 border border-gray-200"
+                  >
+                    <div className="bg-green-100 p-2 rounded-full">
+                      <FiSend className="text-green-500" size={20} />
+                    </div>
+                    <div>
+                      <p className="font-medium">Send to WhatsApp</p>
+                      <p className="text-sm text-gray-500">Share the list via WhatsApp</p>
+                    </div>
                   </button>
                 </div>
               </div>
