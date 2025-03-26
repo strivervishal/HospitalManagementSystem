@@ -8,6 +8,7 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import AdminPage from "./components/AdminPage";
 import ProtectedRoute from "./components/ProtectedRoute";
+import HelpCenter from "./components/HelpCenter";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
 
       <Route path="/patient" element={<Patient />} />
       <Route path="/pharmacy" element={<Pharmacy />} />
+      <Route path="/help" element={<HelpCenter />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
 
