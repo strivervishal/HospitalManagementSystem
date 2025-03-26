@@ -33,16 +33,25 @@ exports.getDoctorById = async (req, res) => {
 };
 
 // Add new doctor
+// Add new doctor
 exports.addDoctor = async (req, res) => {
   try {
-    const newDoctor = new Doctor(req.body);
+    const currentDate = new Date();
+    const formattedDate = currentDate.toISOString().split("T")[0]; // YYYY-MM-DD format
+    const formattedTime = currentDate.toTimeString().split(" ")[0]; // HH:MM:SS format
+
+    const newDoctor = new Doctor({
+      ...req.body,
+      date: formattedDate,
+      time: formattedTime,
+    });
+
     await newDoctor.save();
     res.status(201).json({ message: "Doctor added successfully", doctor: newDoctor });
   } catch (error) {
     res.status(500).json({ message: "Error adding doctor", error });
   }
 };
-
 // Update doctor
 exports.updateDoctor = async (req, res) => {
   try {
