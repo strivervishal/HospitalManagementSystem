@@ -5,6 +5,7 @@ import Sidebar from "./Sidebar";
 const Pharmacy = () => {
   const [medicines, setMedicines] = useState([]);
   const [form, setForm] = useState({ name: "", description: "", price: "" });
+  
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -117,4 +118,3 @@ const Pharmacy = () => {
 };
 
 export default Pharmacy;
-
