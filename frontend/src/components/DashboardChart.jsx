@@ -1,41 +1,13 @@
-// import React from "react";
-// import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, Legend, ResponsiveContainer } from "recharts";
-
-// const data = [
-//   { name: "Jan", Appointments: 400, Patients: 240 },
-//   { name: "Feb", Appointments: 500, Patients: 350 },
-//   { name: "Mar", Appointments: 700, Patients: 450 },
-//   { name: "Apr", Appointments: 600, Patients: 400 },
-// ];
-
-// const DashboardCharts = () => {
-//   return (
-//     <div className="bg-white rounded-lg shadow-md p-4 w-full h-[300px] sm:h-[400px]">
-//       <h2 className="text-xl sm:text-2xl font-bold text-gray-900 text-center mb-4">
-//         Hospital Statistics
-//       </h2>
-
-//       <div className="h-[250px] sm:h-[350px]">
-//         <ResponsiveContainer width="100%" height="100%">
-//           <BarChart data={data} margin={{ top: 20, right: 20, left: -10, bottom: 5 }}>
-//             <CartesianGrid strokeDasharray="3 3" stroke="#E6F4F1" />
-//             <XAxis dataKey="name" tick={{ fill: "#333", fontSize: 12 }} />
-//             <YAxis tick={{ fill: "#333", fontSize: 12 }} />
-//             <Tooltip contentStyle={{ backgroundColor: "#F8F9FA", borderColor: "#14B8A6" }} />
-//             <Legend verticalAlign="bottom" align="center" wrapperStyle={{ fontSize: "12px" }} />
-//             <Bar dataKey="Appointments" fill="#14B8A6" barSize={30} />
-//             <Bar dataKey="Patients" fill="#3B82F6" barSize={30} />
-//           </BarChart>
-//         </ResponsiveContainer>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default DashboardCharts;
-
 import React from "react";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from "recharts";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  CartesianGrid,
+  ResponsiveContainer,
+} from "recharts";
 
 const data = [
   { name: "Jan", Appointments: 400, Patients: 240 },
@@ -57,10 +29,12 @@ const DashboardCharts = () => {
         {/* Legend (Stacked on small screens) */}
         <div className="flex flex-col sm:flex-row sm:space-x-4 text-sm sm:text-base font-semibold text-gray-700">
           <span className="flex items-center mb-1 sm:mb-0">
-            <span className="w-4 h-4 bg-[#14B8A6] inline-block mr-1"></span> Appointments
+            <span className="w-4 h-4 bg-[#14B8A6] inline-block mr-1"></span>{" "}
+            Appointments
           </span>
           <span className="flex items-center">
-            <span className="w-4 h-4 bg-[#3B82F6] inline-block mr-1"></span> Patients
+            <span className="w-4 h-4 bg-[#3B82F6] inline-block mr-1"></span>{" "}
+            Patients
           </span>
         </div>
       </div>
@@ -68,11 +42,19 @@ const DashboardCharts = () => {
       {/* Bar Chart */}
       <div className="w-full h-[250px] sm:h-[350px] lg:h-[400px]">
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={data} margin={{ top: 20, right: 10, left: -10, bottom: 5 }}>
+          <BarChart
+            data={data}
+            margin={{ top: 20, right: 10, left: -10, bottom: 5 }}
+          >
             <CartesianGrid strokeDasharray="3 3" stroke="#E6F4F1" />
             <XAxis dataKey="name" tick={{ fill: "#333", fontSize: 12 }} />
             <YAxis tick={{ fill: "#333", fontSize: 12 }} />
-            <Tooltip contentStyle={{ backgroundColor: "#F8F9FA", borderColor: "#14B8A6" }} />
+            <Tooltip
+              contentStyle={{
+                backgroundColor: "#F8F9FA",
+                borderColor: "#14B8A6",
+              }}
+            />
             <Bar dataKey="Appointments" fill="#14B8A6" barSize={30} />
             <Bar dataKey="Patients" fill="#3B82F6" barSize={30} />
           </BarChart>
@@ -83,5 +65,3 @@ const DashboardCharts = () => {
 };
 
 export default DashboardCharts;
-
-
