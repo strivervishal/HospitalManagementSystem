@@ -13,10 +13,10 @@ const doctorSchema = new mongoose.Schema({
     days: { type: [String], required: true },
     time: { type: String, required: true },
   },
-  date: { type: String, required: true },
-  time: { type: String, required: true },
+  date: { type: String, default: () => new Date().toISOString().split("T")[0] },
+  time: { type: String, default: () => new Date().toTimeString().split(" ")[0] },
   status: { type: String, enum: ["active", "inactive"], default: "active" },
-  profileImage: { type: String, required: true },
+  profileImage: { type: String },
 });
 
 module.exports = mongoose.model("Doctor", doctorSchema);

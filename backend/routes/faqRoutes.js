@@ -1,15 +1,10 @@
 const express = require("express");
 const router = express.Router();
+const faqController = require("../controllers/faqControllers");
 
-// Sample FAQs
-const faqs = [
-    { id: 1, question: "What are the hospital's visiting hours?", answer: "Visiting hours are from 9 AM to 9 PM." },
-    { id: 2, question: "Do you accept insurance?", answer: "Yes, we accept major insurance providers." },
-];
-
-// Route to get all FAQs
-router.get("/", (req, res) => {
-    res.json(faqs);
-});
+// Routes
+router.get("/", faqController.getFAQs);
+router.post("/", faqController.addFAQ);
+router.delete("/:id", faqController.deleteFAQ);
 
 module.exports = router;
