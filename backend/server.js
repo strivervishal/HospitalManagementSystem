@@ -7,13 +7,14 @@ const session = require("express-session");
 const User = require("./models/user");
 
 const doctorRoutes = require("./routes/doctorRoutes");
-const dashboardCardRoutes = require("./routes/dashboardCards"); 
+const dashboardCardRoutes = require("./routes/dashboardCards");
 const patientRoutes = require("./routes/patientRoutes");
 const appointmentRoutes = require("./routes/appointment");
 const authRoutes = require("./routes/auth");
 const medicineRoutes = require("./routes/medicineRoutes");
 const orderRoutes = require("./routes/orderRoutes");
-const faqRoutes = require("./routes/faqRoutes")
+const faqRoutes = require("./routes/faqRoutes");
+const chartRoutes = require("./routes/chartRoutes"); // ✅ Added Chart API Route
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -50,6 +51,7 @@ passport.deserializeUser((id, done) => {
     .catch((err) => done(err));
 });
 
+// ✅ Connect to MongoDB
 async function connectDB() {
   try {
     await mongoose.connect(MONGO_URI, {
@@ -64,6 +66,7 @@ async function connectDB() {
 }
 connectDB();
 
+// ✅ Routes
 app.use("/patients", patientRoutes);
 app.use("/appointments", appointmentRoutes);
 app.use("/api/dashboardcards", dashboardCardRoutes);
@@ -72,5 +75,6 @@ app.use("/api/doctors", doctorRoutes);
 app.use("/api/medicines", medicineRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/faqs", faqRoutes);
+app.use("/api/charts", chartRoutes); // ✅ Added Chart API
 
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
