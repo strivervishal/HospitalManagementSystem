@@ -27,39 +27,103 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded shadow-md w-96">
-        <h2 className="text-2xl font-bold mb-4">Sign Up</h2>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+      background: "#17C3B2"
+      }}
+    >
+      <div
+        style={{
+          background: "#fff",
+          padding: "40px",
+          borderRadius: "10px",
+          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+          width: "480px",
+          textAlign: "center",
+        }}
+      >
+        <h2 style={{ fontSize: "24px", fontWeight: "bold", marginBottom: "16px", color: "#003366" }}>
+          Sign Up
+        </h2>
         <form onSubmit={handleSubmit}>
           <input
             type="text"
             name="username"
             placeholder="Username"
-            className="w-full p-2 border rounded mb-2"
+            style={{
+              width: "100%",
+              padding: "10px",
+              border: "1px solid #ccc",
+              borderRadius: "5px",
+              marginBottom: "10px",
+            }}
             onChange={handleChange}
           />
           <input
             type="email"
             name="email"
             placeholder="Email"
-            className="w-full p-2 border rounded mb-2"
+            style={{
+              width: "100%",
+              padding: "10px",
+              border: "1px solid #ccc",
+              borderRadius: "5px",
+              marginBottom: "10px",
+            }}
             onChange={handleChange}
           />
           <input
             type="password"
             name="password"
             placeholder="Password"
-            className="w-full p-2 border rounded mb-2"
+            style={{
+              width: "100%",
+              padding: "10px",
+              border: "1px solid #ccc",
+              borderRadius: "5px",
+              marginBottom: "10px",
+            }}
             onChange={handleChange}
           />
-          <select name="role" className="w-full p-2 border rounded mb-2" onChange={handleChange}>
+          <select
+            name="role"
+            style={{
+              width: "100%",
+              padding: "10px",
+              border: "1px solid #ccc",
+              borderRadius: "5px",
+              marginBottom: "10px",
+            }}
+            onChange={handleChange}
+          >
             <option value="doctor">Doctor</option>
             <option value="patient">Patient</option>
           </select>
-          <button className="w-full bg-teal-500 text-white p-2 rounded">Sign Up</button>
+          <button
+            type="submit"
+            style={{
+              width: "100%",
+              background: "#17C3B2", 
+              color: "#fff",
+              padding: "10px",
+              borderRadius: "5px",
+              border: "none",
+              cursor: "pointer",
+              fontSize: "16px",
+            }}
+          >
+            Sign Up
+          </button>
         </form>
-        <p className="mt-4 text-center">
-          Already have an account? <Link to="/login" className="text-teal-500">Login</Link>
+        <p style={{ marginTop: "16px", fontSize: "14px" }}>
+          Already have an account?{" "}
+          <Link to="/login" style={{ color: "#003366", fontWeight: "bold", textDecoration: "none" }}>
+            Login
+          </Link>
         </p>
       </div>
     </div>
