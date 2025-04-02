@@ -177,242 +177,246 @@ const Doctor = () => {
 
   return (
     <div className="h-screen flex flex-col">
-      <Navbar />
-      <div className="flex flex-grow">
-        <Sidebar />
-        <div className="flex-1 flex flex-col ml-70 mt-18 mr-6">
-          <div className="flex justify-between items-center mb-6">
-            <h1 className="text-2xl font-bold text-gray-800">Doctors List</h1>
+  <Navbar />
+  <div className="flex flex-grow overflow-hidden">
+    {/* Sidebar for larger screens */}
+    <div className="hidden md:block">
+      <Sidebar />
+    </div>
+
+    {/* Main Content */}
+    <div className="flex-1 flex flex-col ml-0 md:ml-60 mt-18 mr-6 p-4 md:p-6 bg-gray-100 overflow-auto">
+    <div className="flex justify-between items-center mb-6">
+  <h1 className="text-2xl font-bold text-gray-800">Doctors List</h1>
+  <div className="ml-auto">
+    <button
+      className="flex items-center gap-2 bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded-md w-auto"
+      onClick={handleExport}
+    >
+      <FiDownload size={16} />
+      <span>Export</span>
+    </button>
+  </div>
+</div>
+
+
+      <div className="bg-white rounded-lg shadow-sm">
+        {/* Filters and Search */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-4 border-b border-gray-200">
+          <h2 className="text-lg font-semibold text-gray-800 mb-4 sm:mb-0">Doctors List</h2>
+
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 w-full sm:w-auto">
+            <div className="relative w-full sm:w-64">
+              <input
+                type="text"
+                placeholder="Search"
+                value={searchQuery}
+                onChange={handleSearch}
+                className="w-full pl-9 pr-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+              />
+              <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            </div>
+
+            <div className="relative w-full sm:w-auto">
+  <DateFilter selectedDate={selectedDate} onDateChange={setSelectedDate} />
+</div>
+
             <button
               className="flex items-center gap-2 bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded-md"
-              onClick={handleExport}
+              onClick={() => {
+                setEditingDoctor(null)
+                setIsModalOpen(true)
+              }}
             >
-              <FiDownload size={16} />
-              <span>Export</span>
+              <FiPlus size={16} />
+              <span>Add New</span>
             </button>
           </div>
+        </div>
 
-          <div className="bg-white rounded-lg shadow-sm">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center p-4 border-b border-gray-200">
-              <h2 className="text-lg font-semibold text-gray-800 mb-4 md:mb-0">Doctors List</h2>
-
-              <div className="flex flex-col md:flex-row items-start md:items-center gap-3 w-full md:w-auto">
-                <div className="relative w-full md:w-64">
-                  <input
-                    type="text"
-                    placeholder="Search"
-                    value={searchQuery}
-                    onChange={handleSearch}
-                    className="w-full pl-9 pr-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
-                  />
-                  <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                </div>
-
-                <DateFilter selectedDate={selectedDate} onDateChange={setSelectedDate} />
-
-                <button
-                  className="flex items-center gap-2 bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded-md"
-                  onClick={() => {
-                    setEditingDoctor(null)
-                    setIsModalOpen(true)
-                  }}
-                >
-                  <FiPlus size={16} />
-                  <span>Add New</span>
-                </button>
-              </div>
-            </div>
-
-            <div className="overflow-x-auto">
-              {loading ? (
-                <div className="p-6 text-center">Loading...</div>
-              ) : error ? (
-                <div className="p-6 text-center text-red-500">{error}</div>
-              ) : (
-                <table className="w-full">
-                  <thead className="bg-gray-50">
-                    <tr>
-                      <th className="px-4 py-3 text-left text-sm font-medium text-gray-600">
-                        <div className="flex items-center gap-2">
-                          Doctor Name
-                          <FiFilter size={14} className="text-gray-400" />
-                        </div>
-                      </th>
-                      <th className="px-4 py-3 text-left text-sm font-medium text-gray-600">
-                        <div className="flex items-center gap-2">
-                          Department
-                          <FiFilter size={14} className="text-gray-400" />
-                        </div>
-                      </th>
-                      <th className="px-4 py-3 text-left text-sm font-medium text-gray-600">
-                        <div className="flex items-center gap-2">
-                          Date
-                          <FiFilter size={14} className="text-gray-400" />
-                        </div>
-                      </th>
-                      <th className="px-4 py-3 text-left text-sm font-medium text-gray-600">
-                        <div className="flex items-center gap-2">
-                          Time
-                          <FiFilter size={14} className="text-gray-400" />
-                        </div>
-                      </th>
-                      <th className="px-4 py-3 text-left text-sm font-medium text-gray-600">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-200">
-                    {doctors.map((doctor) => (
-                      <tr key={doctor._id} className="hover:bg-gray-50">
-                        <td className="px-4 py-3 text-sm text-gray-700">{doctor.name}</td>
-                        <td className="px-4 py-3 text-sm text-gray-700">{doctor.department}</td>
-                        <td className="px-4 py-3 text-sm text-gray-700">{doctor.date}</td>
-                        <td className="px-4 py-3 text-sm text-gray-700">{doctor.time}</td>
-                        <td className="px-4 py-3 text-sm">
-                          <div className="flex gap-3">
-                            <button
-                              className="text-gray-500 hover:text-blue-500"
-                              onClick={() => {
-                                setEditingDoctor(doctor)
-                                setIsModalOpen(true)
-                              }}
-                            >
-                              <FiEdit2 size={18} />
-                            </button>
-                            <button
-                              className="text-gray-500 hover:text-red-500"
-                              onClick={() => setShowDeleteConfirm(doctor._id)}
-                            >
-                              <FiTrash2 size={18} />
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              )}
-            </div>
-
-            <div className="flex flex-col md:flex-row justify-between items-center p-4 border-t border-gray-200">
-              <div className="text-sm text-gray-500 mb-4 md:mb-0">
-                Showing {doctors.length > 0 ? 1 : 0} of {totalPages * 10}
-              </div>
-              <div className="flex items-center gap-1">
-                <button
-                  className="w-8 h-8 flex items-center justify-center rounded border border-gray-300 disabled:opacity-50"
-                  disabled={currentPage === 1}
-                  onClick={() => handlePageChange(currentPage - 1)}
-                >
-                  &lt;
-                </button>
-
-                {Array.from({ length: Math.min(totalPages, 3) }, (_, i) => i + 1).map((page) => (
-                  <button
-                    key={page}
-                    className={`w-8 h-8 flex items-center justify-center rounded ${
-                      currentPage === page ? "bg-teal-500 text-white" : "border border-gray-300 hover:bg-gray-50"
-                    }`}
-                    onClick={() => handlePageChange(page)}
-                  >
-                    {page}
-                  </button>
+        {/* Doctor Table */}
+        <div className="overflow-x-auto">
+          {loading ? (
+            <div className="p-6 text-center">Loading...</div>
+          ) : error ? (
+            <div className="p-6 text-center text-red-500">{error}</div>
+          ) : (
+            <table className="w-full min-w-max table-auto">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-gray-600">
+                    Doctor Name
+                  </th>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-gray-600">
+                    Department
+                  </th>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-gray-600">
+                    Date
+                  </th>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-gray-600">
+                    Time
+                  </th>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-gray-600">Action</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200">
+                {doctors.map((doctor) => (
+                  <tr key={doctor._id} className="hover:bg-gray-50">
+                    <td className="px-4 py-3 text-sm text-gray-700">{doctor.name}</td>
+                    <td className="px-4 py-3 text-sm text-gray-700">{doctor.department}</td>
+                    <td className="px-4 py-3 text-sm text-gray-700">{doctor.date}</td>
+                    <td className="px-4 py-3 text-sm text-gray-700">{doctor.time}</td>
+                    <td className="px-4 py-3 text-sm">
+                      <div className="flex gap-3">
+                        <button
+                          className="text-gray-500 hover:text-blue-500"
+                          onClick={() => {
+                            setEditingDoctor(doctor)
+                            setIsModalOpen(true)
+                          }}
+                        >
+                          <FiEdit2 size={18} />
+                        </button>
+                        <button
+                          className="text-gray-500 hover:text-red-500"
+                          onClick={() => setShowDeleteConfirm(doctor._id)}
+                        >
+                          <FiTrash2 size={18} />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
                 ))}
-
-                {totalPages > 3 && <span className="px-1">...</span>}
-
-                <button
-                  className="w-8 h-8 flex items-center justify-center rounded border border-gray-300 disabled:opacity-50"
-                  disabled={currentPage === totalPages}
-                  onClick={() => handlePageChange(currentPage + 1)}
-                >
-                  &gt;
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Add/Edit Doctor Modal */}
-          {isModalOpen && (
-            <AddDoctorModal
-              isOpen={isModalOpen}
-              onClose={() => {
-                setIsModalOpen(false)
-                setEditingDoctor(null)
-              }}
-              onSubmit={editingDoctor ? handleEditDoctor : handleAddDoctor}
-              initialData={editingDoctor}
-            />
-          )}
-
-          {/* Delete Confirmation Modal */}
-          {showDeleteConfirm && (
-            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-              <div className="bg-white rounded-lg p-6 max-w-sm w-full">
-                <h3 className="text-lg font-semibold mb-4">Confirm Delete</h3>
-                <p className="text-gray-600 mb-6">
-                  Are you sure you want to delete this doctor? This action cannot be undone.
-                </p>
-                <div className="flex justify-end gap-4">
-                  <button
-                    className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
-                    onClick={() => setShowDeleteConfirm(null)}
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
-                    onClick={() => handleDeleteDoctor(showDeleteConfirm)}
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Export Popup */}
-          {showExportPopup && (
-            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-              <div className="bg-white rounded-lg p-6 max-w-sm w-full">
-                <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-lg font-semibold">Export Doctors List</h3>
-                  <button onClick={() => setShowExportPopup(false)} className="text-gray-500 hover:text-gray-700">
-                    <FiX size={20} />
-                  </button>
-                </div>
-
-                <div className="space-y-4 py-2">
-                  <button
-                    onClick={handleExportPDF}
-                    className="w-full flex items-center gap-3 px-4 py-3 text-left rounded-md hover:bg-gray-50 border border-gray-200"
-                  >
-                    <div className="bg-red-100 p-2 rounded-full">
-                      <FiFileText className="text-red-500" size={20} />
-                    </div>
-                    <div>
-                      <p className="font-medium">Download as PDF</p>
-                      <p className="text-sm text-gray-500">Save the list as a PDF document</p>
-                    </div>
-                  </button>
-
-                  <button
-                    onClick={handleShareWhatsApp}
-                    className="w-full flex items-center gap-3 px-4 py-3 text-left rounded-md hover:bg-gray-50 border border-gray-200"
-                  >
-                    <div className="bg-green-100 p-2 rounded-full">
-                      <FiSend className="text-green-500" size={20} />
-                    </div>
-                    <div>
-                      <p className="font-medium">Send to WhatsApp</p>
-                      <p className="text-sm text-gray-500">Share the list via WhatsApp</p>
-                    </div>
-                  </button>
-                </div>
-              </div>
-            </div>
+              </tbody>
+            </table>
           )}
         </div>
+
+        {/* Pagination */}
+        <div className="flex flex-col sm:flex-row justify-between items-center p-4 border-t border-gray-200">
+          <div className="text-sm text-gray-500 mb-4 sm:mb-0">
+            Showing {doctors.length > 0 ? 1 : 0} of {totalPages * 10}
+          </div>
+          <div className="flex items-center gap-1">
+            <button
+              className="w-8 h-8 flex items-center justify-center rounded border border-gray-300 disabled:opacity-50"
+              disabled={currentPage === 1}
+              onClick={() => handlePageChange(currentPage - 1)}
+            >
+              &lt;
+            </button>
+
+            {Array.from({ length: Math.min(totalPages, 3) }, (_, i) => i + 1).map((page) => (
+              <button
+                key={page}
+                className={`w-8 h-8 flex items-center justify-center rounded ${
+                  currentPage === page ? "bg-teal-500 text-white" : "border border-gray-300 hover:bg-gray-50"
+                }`}
+                onClick={() => handlePageChange(page)}
+              >
+                {page}
+              </button>
+            ))}
+
+            {totalPages > 3 && <span className="px-1">...</span>}
+
+            <button
+              className="w-8 h-8 flex items-center justify-center rounded border border-gray-300 disabled:opacity-50"
+              disabled={currentPage === totalPages}
+              onClick={() => handlePageChange(currentPage + 1)}
+            >
+              &gt;
+            </button>
+          </div>
+        </div>
       </div>
+
+      {/* Modals */}
+      {/* Add/Edit Doctor Modal */}
+      {isModalOpen && (
+        <AddDoctorModal
+          isOpen={isModalOpen}
+          onClose={() => {
+            setIsModalOpen(false)
+            setEditingDoctor(null)
+          }}
+          onSubmit={editingDoctor ? handleEditDoctor : handleAddDoctor}
+          initialData={editingDoctor}
+        />
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {showDeleteConfirm && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 max-w-sm w-full">
+            <h3 className="text-lg font-semibold mb-4">Confirm Delete</h3>
+            <p className="text-gray-600 mb-6">
+              Are you sure you want to delete this doctor? This action cannot be undone.
+            </p>
+            <div className="flex justify-end gap-4">
+              <button
+                className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
+                onClick={() => setShowDeleteConfirm(null)}
+              >
+                Cancel
+              </button>
+              <button
+                className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+                onClick={() => handleDeleteDoctor(showDeleteConfirm)}
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Export Popup */}
+      {showExportPopup && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-4">
+          <div className="bg-white rounded-lg p-6 max-w-sm w-full">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-semibold">Export Doctors List</h3>
+              <button onClick={() => setShowExportPopup(false)} className="text-gray-500 hover:text-gray-700">
+                <FiX size={20} />
+              </button>
+            </div>
+
+            <div className="space-y-4 py-2">
+              <button
+                onClick={handleExportPDF}
+                className="w-full flex items-center gap-3 px-4 py-3 text-left rounded-md hover:bg-gray-50 border border-gray-200"
+              >
+                <div className="bg-red-100 p-2 rounded-full">
+                  <FiFileText className="text-red-500" size={20} />
+                </div>
+                <div>
+                  <p className="font-medium">Download as PDF</p>
+                  <p className="text-sm text-gray-500">Save the list as a PDF document</p>
+                </div>
+              </button>
+
+              <button
+                onClick={handleShareWhatsApp}
+                className="w-full flex items-center gap-3 px-4 py-3 text-left rounded-md hover:bg-gray-50 border border-gray-200"
+              >
+                <div className="bg-green-100 p-2 rounded-full">
+                  <FiSend className="text-green-500" size={20} />
+                </div>
+                <div>
+                  <p className="font-medium">Send to WhatsApp</p>
+                  <p className="text-sm text-gray-500">Share the list via WhatsApp</p>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
+  </div>
+</div>
+
+
   )
 }
 
@@ -737,4 +741,3 @@ const DateFilter = ({ selectedDate, onDateChange }) => {
 }
 
 export default Doctor
-
