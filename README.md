@@ -11,4 +11,3 @@ Welcome to the **Hospital Management System** repository! This project is design
    ```
 
 
-Hai: Myself Rajesh Bugga
